@@ -1,0 +1,21 @@
+[Unit]
+Description=FastAPI Click Merchant Integration Demo
+After=network.target
+
+[Service]
+Type=simple
+User=fastapiclick
+Group=fastapiclick
+WorkingDirectory=/opt/fastapiclick
+EnvironmentFile=/opt/fastapiclick/.env
+# Adjust the uv path if `which uv` on your VPS points elsewhere.
+ExecStart=/home/fastapiclick/.local/bin/uv run --frozen uvicorn app.main:app --host 127.0.0.1 --port 8000 --workers 1
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ReadWritePaths=/opt/fastapiclick
+
+[Install]
+WantedBy=multi-user.target
