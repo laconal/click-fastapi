@@ -4,6 +4,10 @@ NEVER hardcode secret_key - load it from the environment.
 """
 import os
 
+from dotenv import load_dotenv
+
+load_dotenv()  # no-op for values already set in the real environment (e.g. by systemd)
+
 CLICK_SERVICE_ID = int(os.environ.get("CLICK_SERVICE_ID", "0"))
 CLICK_MERCHANT_ID = int(os.environ.get("CLICK_MERCHANT_ID", "0"))
 CLICK_MERCHANT_USER_ID = int(os.environ.get("CLICK_MERCHANT_USER_ID", "0"))
